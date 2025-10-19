@@ -1,0 +1,313 @@
+/* ===== Body estilo iOS / Glass ===== */
+:root{
+  --bg-base: #0b0b0c;                /* fundo base (dark) */
+  --text-color: #f5f7fb;             /* cor do texto */
+  --blob-blue: #3b82f6;              /* azul */
+  --blob-purple: #a855f7;            /* roxo */
+  --blob-green: #22c55e;             /* verde */
+  --grain-opacity: 0.03;             /* intensidade do grão */
+}
+
+@media (prefers-color-scheme: light){
+  :root{
+    --bg-base: #f6f7fb;
+    --text-color: #0b0b0c;
+    --blob-blue: #60a5fa;
+    --blob-purple: #c084fc;
+    --blob-green: #4ade80;
+    --grain-opacity: 0.06;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Inter, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Fundo com blobs radiais e um gradiente sutil por baixo */
+  background:
+    radial-gradient(1200px 600px at 10% -10%, var(--blob-blue) 0%, transparent 60%),
+    radial-gradient(900px 500px at 100% 10%, var(--blob-purple) 0%, transparent 60%),
+    radial-gradient(800px 400px at 50% 120%, var(--blob-green) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.1)),
+    var(--bg-base);
+
+  /* Fixar background para um efeito mais “parallax” ao rolar */
+  background-attachment: fixed, fixed, fixed, fixed, fixed;
+
+  /* Granulação leve para dar textura “material” */
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Camada de grão (grain) bem leve — opcional */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,var(--grain-opacity)) 0 1px, transparent 1px 2px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,var(--grain-opacity)) 0 1px, transparent 1px 2px);
+  mix-blend-mode: overlay;
+}
+
+/* Classe utilitária para centralizar uma seção principal (opcional) */
+.center-stage{
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+
+h1 {
+  color: #ffffff;
+  font-size: 2rem;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 10px rgba(255,255,255,0.3);
+  backdrop-filter: blur(4px);
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  display: inline-block;
+}
+
+
+.img-glass {
+  display: block;
+  max-width: 100%;
+  width: 600px;
+  height: auto;
+  border-radius: 14px;
+  margin: 20px 0;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.25),
+              0 10px 30px rgba(0,0,0,0.25);
+}
+
+
+/* iOS Glass Button */
+.ios-glass-btn{
+  position:relative;
+  appearance:none;
+  border:1px solid rgba(255,255,255,.35);
+  padding:14px 28px;
+  border-radius:18px;
+  color:#fff;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.18), rgba(255,255,255,.08)),
+    rgba(255,255,255,.10);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    0 8px 30px rgba(0,0,0,.25);
+  font:600 1rem/1.1 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Inter, Arial, sans-serif;
+  letter-spacing:.2px;
+  cursor:pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  outline:none;
+}
+.ios-glass-btn::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:inherit; pointer-events:none;
+  background: linear-gradient(to bottom, rgba(255,255,255,.6), rgba(255,255,255,0) 45%);
+  mix-blend-mode:screen;
+  mask: linear-gradient(#000, transparent 60%);
+}
+.ios-glass-btn:hover{
+  transform:translateY(-2px);
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.24), rgba(255,255,255,.10)),
+    rgba(255,255,255,.10);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.45),
+    0 12px 36px rgba(0,0,0,.25);
+}
+.ios-glass-btn:active{
+  transform:translateY(0);
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.16), rgba(255,255,255,.06)),
+    rgba(255,255,255,.10);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.25),
+    0 6px 22px rgba(0,0,0,.25);
+}
+.ios-glass-btn:focus-visible{
+  box-shadow:
+    0 0 0 3px rgba(59,130,246,.35),
+    inset 0 1px 0 rgba(255,255,255,.35),
+    0 8px 30px rgba(0,0,0,.25);
+}
+
+/* Variações opcionais */
+.ios-glass-btn--lg{ padding:16px 34px; border-radius:20px; font-size:1.05rem; }
+.ios-glass-btn--gold{
+  border-color: rgba(255,215,128,.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,240,200,.55),
+    0 8px 30px rgba(0,0,0,.25);
+}
+.ios-glass-btn--blue{ /* estilo iMessage */
+  color:#eaf2ff;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.18), rgba(255,255,255,.08)),
+    rgba(59,130,246,.20);
+  border-color: rgba(147,197,253,.6);
+}
+
+.footer-glass{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  padding: 16px 24px;
+  margin-top: 32px;
+
+  color: #fff;
+  background: rgba(255,255,255,.06);
+  border-top: 1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.2),
+    0 -10px 30px rgba(0,0,0,.18);
+  text-align: center;
+  font: 500 0.95rem/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Inter, Arial, sans-serif;
+}
+
+/* ===== Layout p/ footer no fundo ===== */
+html, body { height: 100%; }
+body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  margin: 0; /* importante */
+}
+/* Empurra o footer para o fim mesmo sem <main> */
+body > footer { margin-top: auto; }
+
+/* ===== Footer (base dark) ===== */
+.footer-glass{
+  color: #fff;
+  background: rgba(255,255,255,.06);
+  border-top: 1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  padding: 14px 24px;
+  text-align: center;
+}
+
+/* Mantém o footer no fundo */
+html, body { height: 100%; }
+body{
+  display: flex; flex-direction: column; min-height: 100%; margin: 0;
+}
+body > footer { margin-top: auto; }
+
+/* Footer base (você já tinha a variação de tema claro) */
+.footer-glass{
+  color: #fff;
+  background: rgba(255,255,255,.06);
+  border-top: 1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  padding: 14px 24px;
+  text-align: center;
+}
+
+/* Links: sua base + ícones em vidro */
+.footer-glass a{
+  color: #dbe9ff;
+  text-decoration: none;
+  border-bottom: 1px dashed transparent;
+  transition: color .2s ease, border-color .2s ease, opacity .2s ease, transform .2s ease, box-shadow .2s ease, background .2s ease, border .2s ease;
+}
+
+/* Barra de ícones */
+.socials{
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 6px 0 2px;
+}
+
+/* Cartãozinho glass ao redor do ícone */
+.icon-glass{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.30);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    0 8px 24px rgba(0,0,0,.18);
+}
+
+.icon-glass:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.45),
+    0 12px 30px rgba(0,0,0,.22);
+}
+
+/* Ícones SVG */
+.icon-glass svg{
+  width: 18px; height: 18px;
+  fill: currentColor;              /* herda a cor do texto */
+  opacity: .95;
+}
+
+/* Rótulo (texto) */
+.icon-glass span{
+  font-size: .95rem;
+  color: #e7efff;
+}
+
+/* Cores de marca (suaves p/ iOS look) */
+.icon-glass[href*="instagram"]{ color: #ffd9f3; }
+.icon-glass[href*="linkedin"]{  color: #cfe1ff; }
+.icon-glass[href*="github"]{    color: #e6e6e6; }
+
+/* Tema claro */
+@media (prefers-color-scheme: light){
+  .footer-glass{
+    color: #0b0b0c;
+    background: rgba(255,255,255,.55);
+    border-top: 1px solid rgba(0,0,0,.06);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.6),
+      0 -8px 24px rgba(0,0,0,.06);
+  }
+  .icon-glass{ background: rgba(255,255,255,.8); border-color: rgba(0,0,0,.06); }
+  .icon-glass span{ color: #0b0b0c; }
+  .icon-glass[href*="instagram"]{ color: #cc2e84; }
+  .icon-glass[href*="linkedin"]{  color: #0a66c2; }
+  .icon-glass[href*="github"]{    color: #111; }
+}
+
+
