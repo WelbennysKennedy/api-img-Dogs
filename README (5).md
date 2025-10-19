@@ -8,8 +8,8 @@ Projeto simples, **responsivo** e estiloso (Glassmorphism no estilo iOS) que exi
 
 ## 🔗 Demo (GitHub Pages)
 
-**Site online:** https://fujitsu.github.io/dogs-imagens/  
-**Repositório:** https://github.com/Fujitsu/dogs-imagens
+**Site online:** https://welbennyskennedy.github.io/api-img-Dogs/  
+**Repositório:** 
 
 > Se você for usar outro repositório, ajuste `https://SEU_USUARIO.github.io/SEU_REPOSITORIO/`.
 
