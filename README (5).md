@@ -9,7 +9,7 @@ Projeto simples, **responsivo** e estiloso (Glassmorphism no estilo iOS) que exi
 ## 🔗 Demo (GitHub Pages)
 
 **Site online:** https://welbennyskennedy.github.io/api-img-Dogs/  
-**Repositório:** 
+**Repositório:** https://github.com/WelbennysKennedy/api-img-Dogs
 
 > Se você for usar outro repositório, ajuste `https://SEU_USUARIO.github.io/SEU_REPOSITORIO/`.
 
